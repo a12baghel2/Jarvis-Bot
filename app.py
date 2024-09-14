@@ -1,5 +1,5 @@
 import logging 
-from telegram.ext import Updater,CommandHandler,MessageHandler,Filters,Dispatcher
+from telegram.ext import Updater,CommandHandler,MessageHandler,filters, Application
 from flask import Flask,request
 from telegram import Bot,Update, ReplyKeyboardMarkup
 from utils import get_reply,fetch_status,fetch_weather,fetch_quote,mars,getPic,camera_keyboard,news_topic,get_news
@@ -75,18 +75,19 @@ def error(bot,update):
 bot = Bot(TOKEN)
 
 try:
-	bot.set_webhook("https://jarvis-bot-omega.vercel.app/"+TOKEN)
+	async def set_webhook(): await bot.set_webhook("https://jarvis-bot-omega.vercel.app/"+TOKEN)
 except Exception as e:
 	print(e)
 
-dp = Dispatcher(bot,None)
+dp = Application.builder().token(TOKEN).build()
 dp.add_handler(CommandHandler("start",start))
 dp.add_handler(CommandHandler("help",_help))
 dp.add_handler(CommandHandler("camera",camera))
 dp.add_handler(CommandHandler("news",news))
-dp.add_handler(MessageHandler(Filters.text,reply_text))
-dp.add_handler(MessageHandler(Filters.sticker,echo_sticker))
+dp.add_handler(MessageHandler(filters.Text,reply_text))
+dp.add_handler(MessageHandler(filters.Sticker,echo_sticker))
 dp.add_error_handler(error)
+dp.run_webhook("https://jarvis-bot-omega.vercel.app/", key=TOKEN)
 
 
 

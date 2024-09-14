@@ -1,5 +1,5 @@
 import os
-import dialogflow_v2 as dialogflow
+import google.cloud.dialogflow as dialogflow
 from urllib.request import urlopen
 import json
 import requests
