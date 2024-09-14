@@ -8,7 +8,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-TOKEN = "YOUR AUTH TOKEN FROM BOT_FATHER"
+TOKEN = "965551773:AAELHqZwhLkOReFjlrjSVZQ7fMCKKtPak8k"
 
 app = Flask(__name__)
 @app.route(f'/{TOKEN}',methods=['GET','POST'])
@@ -92,7 +92,3 @@ dp.add_error_handler(error)
 
 if __name__ == "__main__":
 	app.run(port=8443)
-
-
-
-
