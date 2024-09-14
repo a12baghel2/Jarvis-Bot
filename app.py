@@ -75,7 +75,7 @@ def error(bot,update):
 bot = Bot(TOKEN)
 
 try:
-	bot.set_webhook("https://frozen-scrubland-16741.herokuapp.com/"+TOKEN)
+	bot.set_webhook("https://jarvis-bot-omega.vercel.app/"+TOKEN)
 except Exception as e:
 	print(e)
 
