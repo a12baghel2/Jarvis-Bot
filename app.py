@@ -11,11 +11,12 @@ logger = logging.getLogger(__name__)
 TOKEN = "965551773:AAELHqZwhLkOReFjlrjSVZQ7fMCKKtPak8k"
 
 app = Flask(__name__)
-@app.route(f'/{TOKEN}',methods=['GET','POST'])
-async def webhook():
-	update = await Update.de_json(request.get_json(),bot)
-	dp.process_update(update)
-	return "ok"
+
+# @app.route(f'/{TOKEN}',methods=['GET','POST'])
+# async def webhook():
+# 	update = await Update.de_json(request.get_json(),bot)
+# 	dp.process_update(update)
+# 	return "ok"
 
 async def start(update, context):
 	author = update.message.from_user.first_name
@@ -73,15 +74,16 @@ def error(update):
 
 bot = Bot(TOKEN)
 
-try:
-	async def set_webhook(): await dp.bot.set_webhook("https://jarvis-bot-omega.vercel.app/"+TOKEN)
-except Exception as e:
-	print(e)
+# try:
+# 	async def set_webhook(): await dp.bot.set_webhook("https://jarvis-bot-omega.vercel.app/"+TOKEN)
+# except Exception as e:
+# 	print(e)
 
 # async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 #     await context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a bot, please talk to me!")
 
-if __name__ == "__main__":
+@app.route("/")
+def main():
 	dp = Application.builder().token(TOKEN).build()
 	dp.add_handler(CommandHandler("start",start))
 	dp.add_handler(CommandHandler("help",_help))
@@ -92,3 +94,6 @@ if __name__ == "__main__":
 	dp.add_error_handler(error)
 	# set_webhook()
 	dp.run_polling(0.3)
+
+if __name__ == "__main__":
+	main()
