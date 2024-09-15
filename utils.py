@@ -1,5 +1,5 @@
 import os
-import google.cloud.dialogflow as dialogflow
+import google.cloud.dialogflow_v2 as dialogflow
 from urllib.request import urlopen
 import json
 import requests
@@ -40,15 +40,15 @@ def get_reply(query,chat_id):
         return "small_talk",response.fulfillment_text
 
 def fetch_quote(parameters):
-    url = "https://programming-quotes-api.herokuapp.com/quotes/random/lang/en"
+    url = "https://programming-quotesapi.vercel.app/api/random"
     quoteRes = urlopen(url)
     quoteData = quoteRes.read()
     quoteData = json.loads(quoteData)
-    return quoteData["en"]
+    return quoteData["quote"]
 
 def get_news(parameters):
     category = parameters.get("news_topic")
-    url = "https://api.currentsapi.services/v1/search?language=en&type=1&country=IN&category={}&apiKey={api_key}".format(category)
+    url = "https://api.currentsapi.services/v1/search?language=en&type=1&country=IN&category={}&apiKey=W6NmMtdMLbobjXAZi4yBrKbifC-lJ_cwwDzFnO2SCyY_yUwR".format(category)
     response = requests.get(url)
     data = response.json()
     data = data['news']
@@ -77,7 +77,7 @@ def fetch_weather(parameters):
     geolocator = Nominatim(user_agent="Abhimanyu")
     loc = geolocator.geocode(location)
     lat,lon = loc.latitude, loc.longitude
-    w_url = "https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&lang=en&exclude=daily&units=metric&appid={app_id}".format(lat,lon)
+    w_url = "https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&lang=en&exclude=daily&units=metric&appid=5a9b5d475522296b6babad68ec068724".format(lat,lon)
     w_res = requests.get(w_url)
     data = w_res.content.decode('utf-8')
     data = json.loads(data)
