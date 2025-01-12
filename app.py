@@ -8,7 +8,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-TOKEN = "965551773:AAELHqZwhLkOReFjlrjSVZQ7fMCKKtPak8k"
+TOKEN = "<client token from bot father>"
 
 app = Flask(__name__)
 

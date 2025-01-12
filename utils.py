@@ -48,7 +48,7 @@ def fetch_quote(parameters):
 
 def get_news(parameters):
     category = parameters.get("news_topic")
-    url = "https://api.currentsapi.services/v1/search?language=en&type=1&country=IN&category={}&apiKey=W6NmMtdMLbobjXAZi4yBrKbifC-lJ_cwwDzFnO2SCyY_yUwR".format(category)
+    url = "https://api.currentsapi.services/v1/search?language=en&type=1&country=IN&category={}&apiKey=<your api key>".format(category)
     response = requests.get(url)
     data = response.json()
     data = data['news']
